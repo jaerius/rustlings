@@ -24,10 +24,34 @@ enum Command {
 }
 
 mod my_module {
+    
+    use std::iter::repeat_n;
+    
     use super::Command;
+
 
     // TODO: Complete the function as described above.
     // pub fn transformer(input: ???) -> ??? { ??? }
+    pub fn transformer(input: Vec<(String, Command)>) -> Vec<String>{
+    
+    // 벡터내의 튜플 개수 세기
+    // 튜플 별 커맨드 추출
+    // 커맨드 배교해서 해당하는 투플자리에 바꿔치기
+    // 바꿔치기 된 튜플 반환  
+
+    input.iter().map(|(text, command)| {
+        match command {
+            Command::Uppercase => text.to_uppercase(),
+            Command::Trim => text.trim().to_string(),
+            Command::Append(n) => format!("{}{}", text, "bar".repeat(*n)),
+        }
+    }).collect()
+
+
+
+    
+    
+}
 }
 
 fn main() {
@@ -39,6 +63,7 @@ mod tests {
     // TODO: What do we need to import to have `transformer` in scope?
     // use ???;
     use super::Command;
+    use super::my_module::transformer;
 
     #[test]
     fn it_works() {
